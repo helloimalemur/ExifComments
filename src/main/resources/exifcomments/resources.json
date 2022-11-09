@@ -1,0 +1,11 @@
+{
+  "resources": {
+    "includes": [
+      {"pattern": "org.openjfx.javafxplugin"},
+      {"pattern": "org.graalvm.buildtools.native"},
+      {"pattern": "org.beryx.jlink"}
+    ],
+"excludes": [
+    ]
+  }
+}
