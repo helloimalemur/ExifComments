@@ -11,7 +11,7 @@ plugins {
 
 group ''
 version '1.0-SNAPSHOT'
-mainClassName = 'exifcomments.HelloApplication'
+
 
 javafx {
     version = '17.0.2'
@@ -40,7 +40,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'exifcomments'
-    mainClass = 'exifcomments.HelloApplication'
+    mainClass = 'exifcomments.ExifApplication'
 }
 
 
