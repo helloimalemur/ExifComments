@@ -5,11 +5,22 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.beryx.jlink' version '2.25.0'
+//    id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.15'
     id 'org.graalvm.buildtools.native' version '0.9.17'
 }
 
 group ''
 version '1.0-SNAPSHOT'
+mainClassName = 'exifcomments.HelloApplication'
+
+javafx {
+    version = '17.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+//gluonClient {
+//    reflectionList = ["org.openjfx.javafxplugin", "org.beryx.jlink", "org.graalvm.buildtools.native"]
+//}
 
 repositories {
     mavenCentral()
@@ -32,10 +43,6 @@ application {
     mainClass = 'exifcomments.HelloApplication'
 }
 
-javafx {
-    version = '17.0.2'
-    modules = ['javafx.controls', 'javafx.fxml']
-}
 
 dependencies {
     implementation('org.controlsfx:controlsfx:11.1.1')
@@ -60,9 +67,10 @@ jlinkZip {
     group = 'distribution'
 }
 
-graalvmNative {
-    binaries.all {
-        resources.autodetect()
-    }
-    toolchainDetection = true
-}
+
+//graalvmNative {
+//    binaries.all {
+//        resources.autodetect()
+//    }
+//    toolchainDetection = true
+//}
