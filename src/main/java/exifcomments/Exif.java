@@ -1,7 +1,6 @@
 package exifcomments;
 
 
-
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
 import org.apache.commons.imaging.Imaging;
@@ -20,9 +19,12 @@ import java.util.Objects;
 
 public class Exif {
     String fileName;
+    String OGcreationDate;
     String creationDate;
     Path parentFolder;
     Path path;
+    String OGlocation;
+    String location;
     ImageMetadata metaData;
     ImageMetadata toBeWrittenMetaData;
     String newDescription;
@@ -33,20 +35,24 @@ public class Exif {
         this.path = path;
         this.parentFolder = path.getParent();
         this.fileName = path.getFileName().toString();
-        loadExif();
-        //
     }
 
-    public void loadExif() {
+    public boolean loadExif() {
         if (path.toFile().exists() && !path.toFile().isDirectory()) {
             if ((path.toString().toLowerCase().endsWith(".nef") || path.toString().toLowerCase().endsWith(".jpg"))) {
-                try {
-                    metaData = Imaging.getMetadata(path.toFile());
-                } catch (ImageReadException | IOException ignored) {}
+                try {//TODO: check if corrupt/valid
+                    metaData = Imaging.getMetadata(path.toFile());/////////////
+                    return true;
+                } catch (ImageReadException | IOException | IllegalArgumentException exception) {
+                    System.out.println(exception.getMessage());
+                    return false;
+                }
             }
+            return false;
         }
 
         //
+        return false;
     }
     public void loadExifTags() {
         exifs.addAll(metaData.getItems());
@@ -60,7 +66,13 @@ public class Exif {
 
         exifs.forEach(imageMetadataItem -> {
             if (imageMetadataItem.toString().startsWith("DateTime")) {
-                creationDate = imageMetadataItem.toString();
+//                creationDate = imageMetadataItem.toString();
+                creationDate = imageMetadataItem.toString().split(" ")[1].substring(1)
+                        +" "+ imageMetadataItem.toString().split(" ")[1].substring(1);
+                OGcreationDate = creationDate;
+                OGlocation = location;
+                /////////
+
             }
         });
     }
@@ -166,5 +178,12 @@ public class Exif {
         }
         return false;
     }
-}
 
+    public void setLocation(String newLocation){
+        this.location = newLocation;
+    }
+    public String getLocation(){
+        return this.location;
+    }
+
+}
