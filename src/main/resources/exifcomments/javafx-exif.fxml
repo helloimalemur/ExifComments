@@ -108,7 +108,7 @@
                         <TextField id="fileNameField" layoutX="8.0" layoutY="292.0" promptText="file name" />
                         <TextField id="folderNameField" layoutX="8.0" layoutY="252.0" promptText="folder name" />
                         <TextField id="dateField" layoutX="8.0" layoutY="212.0" promptText="date" />
-                        <Label id="welcomeText" fx:id="welcomeText" layoutX="68.0" layoutY="14.0" text="a" />
+                        <Label id="welcomeText" layoutX="68.0" layoutY="14.0" text="a" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -119,7 +119,7 @@
                         <Label layoutX="205.0" layoutY="120.0" text="Label" />
                         <Button fx:id="previewButton" layoutX="34.0" layoutY="314.0" mnemonicParsing="false" text="Preview" />
                         <Button fx:id="writeButton" layoutX="136.0" layoutY="314.0" mnemonicParsing="false" text="Write" />
-                        <Button fx:id="loadButton" layoutX="253.0" layoutY="314.0" mnemonicParsing="false" text="Load" />
+                        <Button fx:id="loadButton" layoutX="253.0" layoutY="314.0" mnemonicParsing="false" onAction="#onFileChooserButtonClick" text="Load" />
                         <Button fx:id="clearButton" layoutX="362.0" layoutY="314.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Clear" />
                      </children>
                   </AnchorPane>
