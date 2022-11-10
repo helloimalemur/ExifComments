@@ -93,7 +93,7 @@ public class ExifController {
     @FXML
     public void previewButtonPressed() {
         printExifFilesList();
-        printExifData();
+//        printExifData();
         exifDescriptionPreview();
     }
 
@@ -126,7 +126,7 @@ public class ExifController {
 
     public void exifDescriptionPreview() {
 //        String newDescription = "";
-        previewExif.setText("");
+        previewTwoExif.setText("");
         exifArrayList.forEach(exif -> {
             updateInfo(exif);
             String newDescription =
@@ -136,7 +136,7 @@ public class ExifController {
                             + " : " + exif.fileName
                             + " : " + exif.location;
             exif.setNewDescription(newDescription);
-            previewExif.setText(previewExif.getText() + newDescription + "\n");//print tags as loading
+            previewTwoExif.setText(previewTwoExif.getText() + newDescription + "\n");//print tags as loading
         });
     }
 
