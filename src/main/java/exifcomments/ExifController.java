@@ -87,7 +87,9 @@ public class ExifController {
         fileChooser();
     }
     @FXML
-    public void writeButtonPressed() {}
+    public void writeButtonPressed() {
+        writeDesc();
+    }
     @FXML
     public void previewButtonPressed() {
         printExifFilesList();
@@ -122,10 +124,6 @@ public class ExifController {
 //        exifDescriptionPreview();
     }
 
-
-
-
-
     public void exifDescriptionPreview() {
 //        String newDescription = "";
         previewExif.setText("");
@@ -145,6 +143,7 @@ public class ExifController {
     public String getLocationSetting(Exif exif) {
         return exif.toString();
     }
+
     public void writeDesc() {
         previewExif.setText("");
         for (Exif exif: exifArrayList) {
@@ -159,7 +158,6 @@ public class ExifController {
     }
 
     public void printExifData() {//print list of file paths currently loaded
-        String tmp = null;
         previewTwoExif.setText("");
         exifArrayList.forEach(eg -> {
             System.out.println(eg.metaData);
