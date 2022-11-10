@@ -76,7 +76,7 @@ public class ExifController {
         emptyExifFilesList();
     }
     @FXML
-    public void setClearSettingsButton() {
+    public void clearSettingsButtonPressed() {
         dateSetting.clear();
         folderNameSetting.clear();
         nameSetting.clear();
