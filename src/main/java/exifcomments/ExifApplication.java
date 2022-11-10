@@ -12,7 +12,7 @@ public class ExifApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ExifApplication.class.getResource("javafx-exif.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("ExifComments");
         stage.setScene(scene);
         stage.show();
     }
