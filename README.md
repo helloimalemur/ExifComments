@@ -2,7 +2,7 @@
 Used to Grab data about Image and write string into UserComment EXIF tag
 
 
-Install Java: <a href="https://www.oracle.com/java/technologies/downloads/#java17">https://www.oracle.com/java/technologies/downloads/#java17
+Install Java: <a href="https://www.oracle.com/java/technologies/downloads/#java17">17 (quick and easy Windows installer available)</a> or <a href="https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-22.3.0">GraalVM</a>
 
 <h4>Linux;</h4>
 
