@@ -2,6 +2,8 @@
 Used to Grab data about Image and write string into UserComment EXIF tag
 
 
+Install Java: <a href="https://www.oracle.com/java/technologies/downloads/#java17">https://www.oracle.com/java/technologies/downloads/#java17
+
 <h4>Linux;</h4>
 
 1. ```git clone https://github.com/helloimalemur/java-exif-rw```
