@@ -19,6 +19,8 @@ public class ExifController {
     @FXML
     public Button clearButton;
     @FXML
+    public Button clearSettingsButton;
+    @FXML
     public Button loadButton = new Button();
     @FXML
     public Button writeButton = new Button();
@@ -42,9 +44,19 @@ public class ExifController {
     @FXML
     public DirectoryChooser dirFileChooser = new DirectoryChooser();
     @FXML
-    public TextArea descriptionExif = new TextArea();
+    public TextField dateSetting = new TextField();
     @FXML
-    public TextField previewExif = new TextField();
+    public TextField folderNameSetting = new TextField();
+    @FXML
+    public TextField nameSetting = new TextField();
+    @FXML
+    public TextField locationSetting = new TextField();
+
+    @FXML
+    public TextArea previewExif = new TextArea();
+    @FXML
+    public TextArea previewTwoExif = new TextArea();
+
     @FXML
     public List<Exif> exifJList = new ArrayList<>();
     @FXML
@@ -59,15 +71,32 @@ public class ExifController {
     public FileLoader fileLoader = new FileLoader();
     String osType;
 
-
-
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public void clearButtonPressed() {
+        emptyExifFilesList();
+    }
+    @FXML
+    public void setClearSettingsButton() {
+        dateSetting.clear();
+        folderNameSetting.clear();
+        nameSetting.clear();
+        locationSetting.clear();
+    }
+    @FXML
+    public void loadButtonPressed() {
+        fileChooser();
+    }
+    @FXML
+    public void writeButtonPressed() {}
+    @FXML
+    public void previewButtonPressed() {
+        printExifFilesList();
+        printExifData();
+        exifDescriptionPreview();
     }
 
-    @FXML
-    protected void onFileChooserButtonClick() {
+
+    private void fileChooser() {
 //        emptyExifFilesList();
         System.out.println("working dir chooser");
 //        String path = dirFileChooser.showOpenDialog(null).getAbsolutePath();
@@ -109,7 +138,7 @@ public class ExifController {
                             + " : " + exif.fileName
                             + " : " + exif.location;
             exif.setNewDescription(newDescription);
-            previewExif.setText(previewExif.getText() + "\n" + newDescription);//print tags as loading
+            previewExif.setText(previewExif.getText() + newDescription + "\n");//print tags as loading
         });
     }
 
@@ -131,23 +160,30 @@ public class ExifController {
 
     public void printExifData() {//print list of file paths currently loaded
         String tmp = null;
-        previewExif.setText("");
+        previewTwoExif.setText("");
         exifArrayList.forEach(eg -> {
             System.out.println(eg.metaData);
-            previewExif.setText(previewExif.getText() + "\n" + eg.metaData);
+            previewTwoExif.setText(previewTwoExif.getText() + "\n" + eg.metaData);
 
         });
     }
+
+
+
+
     public void emptyExifFilesList() {//drop loaded files / empty array
         exifArrayList.clear();
+        previewExif.clear();
+        previewTwoExif.clear();
     }
 
     public void printExifFilesList() {//print list of file paths currently loaded
-        previewExif.setText("");
+        previewExif.clear();
         exifArrayList.forEach(exif -> {
             System.out.println(exif.path.toString());
-            previewExif.setText(previewExif.getText() + "\n" + exif.path.toString());
+            previewExif.setText(previewExif.getText() + exif.path.toString() + "\n");
         });
+        System.out.println("\n");
     }
 
 
@@ -155,31 +191,31 @@ public class ExifController {
     ///
     ///
     private void updateInfo(Exif exif) {
-//        exifAppPanel.ifLocationChanged(exif);
-//        exifAppPanel.ifDateChanged(exif);
-//        exifAppPanel.ifLocationSetting(exif);
+        ifLocationChanged(exif);
+        ifDateChanged(exif);
+        ifLocationSetting(exif);
 
     }
 
     public void ifDateChanged(Exif exif) {
-//        if (dateSetting.getText().length() > 0) {
-//            exif.creationDate = dateSetting.getText();
-//        } else if (Objects.equals(dateSetting.getText(), "")) {
-//            exif.creationDate = exif.OGcreationDate;
-//        }
+        if (dateSetting.getText().length() > 0) {
+            exif.creationDate = dateSetting.getText();
+        } else if (Objects.equals(dateSetting.getText(), "")) {
+            exif.creationDate = exif.OGcreationDate;
+        }
     }
     public void ifLocationChanged(Exif exif) {
-//        if (locationSetting.getText().length() > 0) {
-//            exif.location = locationSetting.getText();
-//        } else if (Objects.equals(locationSetting.getText(), "")) {
-//            exif.location = exif.OGlocation;
-//        }
+        if (locationSetting.getText().length() > 0) {
+            exif.location = locationSetting.getText();
+        } else if (Objects.equals(locationSetting.getText(), "")) {
+            exif.location = exif.OGlocation;
+        }
     }
 
     public void ifLocationSetting(Exif exif) {
-//        if (locationSetting.getText().length() != 0) {
-//            exif.location = locationSetting.getText();
-//        }
+        if (locationSetting.getText().length() != 0) {
+            exif.location = locationSetting.getText();
+        }
     }
 
 
