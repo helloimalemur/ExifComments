@@ -45,9 +45,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="exifcomments.ExifController">
+<VBox prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="exifcomments.ExifController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar prefHeight="7.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -93,21 +93,21 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <SplitPane layoutX="-1.0" prefHeight="372.0" prefWidth="640.0">
+            <SplitPane layoutX="-1.0" prefHeight="450.0" prefWidth="800.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextField id="fileNameField" fx:id="nameSetting" layoutX="42.0" layoutY="218.0" promptText="file name" />
-                        <TextField id="locationField" fx:id="locationSetting" layoutX="42.0" layoutY="242.0" promptText="location" />
-                        <TextField id="folderNameField" fx:id="folderNameSetting" layoutX="42.0" layoutY="266.0" promptText="folder name" />
-                        <TextField id="dateField" fx:id="dateSetting" layoutX="42.0" layoutY="290.0" promptText="date" />
-                        <Button fx:id="clearSettingsButton" layoutX="16.0" layoutY="324.0" mnemonicParsing="false" onAction="#clearSettingsButtonPressed" prefHeight="24.0" prefWidth="132.0" text="Clear options" />
-                        <Button fx:id="previewButton" layoutX="358.0" layoutY="344.0" mnemonicParsing="false" onAction="#previewButtonPressed" text="Preview" />
-                        <Button fx:id="writeButton" layoutX="447.0" layoutY="344.0" mnemonicParsing="false" onAction="#writeButtonPressed" text="Write" />
-                        <Button fx:id="loadButton" layoutX="513.0" layoutY="344.0" mnemonicParsing="false" onAction="#loadButtonPressed" text="Load" />
-                        <Button fx:id="clearButton" layoutX="572.0" layoutY="344.0" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
-                        <TextArea fx:id="previewExif" layoutX="223.0" layoutY="142.0" prefHeight="87.0" prefWidth="409.0" promptText="PreviewOne" />
-                        <TextArea fx:id="previewTwoExif" layoutX="224.0" layoutY="247.0" prefHeight="87.0" prefWidth="409.0" promptText="previewTwo" />
+                        <TextField id="fileNameField" fx:id="nameSetting" layoutX="14.0" layoutY="14.0" promptText="file name" />
+                        <TextField id="locationField" fx:id="locationSetting" layoutX="14.0" layoutY="38.0" promptText="location" />
+                        <TextField id="folderNameField" fx:id="folderNameSetting" layoutX="14.0" layoutY="62.0" promptText="folder name" />
+                        <TextField id="dateField" fx:id="dateSetting" layoutX="14.0" layoutY="86.0" promptText="date" />
+                        <Button fx:id="clearSettingsButton" layoutX="34.0" layoutY="110.0" mnemonicParsing="false" onAction="#clearSettingsButtonPressed" prefHeight="24.0" prefWidth="132.0" text="Clear options" />
+                        <Button fx:id="previewButton" layoutX="262.0" layoutY="410.0" mnemonicParsing="false" onAction="#previewButtonPressed" text="Preview" />
+                        <Button fx:id="writeButton" layoutX="351.0" layoutY="410.0" mnemonicParsing="false" onAction="#writeButtonPressed" text="Write" />
+                        <Button fx:id="loadButton" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" onAction="#loadButtonPressed" text="Load" />
+                        <Button fx:id="clearButton" layoutX="476.0" layoutY="410.0" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
+                        <TextArea fx:id="previewExif" layoutX="20.0" layoutY="208.0" prefHeight="87.0" prefWidth="764.0" promptText="PreviewOne" />
+                        <TextArea fx:id="previewTwoExif" layoutX="21.0" layoutY="313.0" prefHeight="87.0" prefWidth="764.0" promptText="previewTwo" />
                      </children>
                   </AnchorPane>
               </items>
