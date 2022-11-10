@@ -18,4 +18,4 @@ Install Java: <a href="https://www.oracle.com/java/technologies/downloads/#java1
 
 2. Extract zip
 
-3. run in PowerShell: ```.\gradlew run``` or double click ```gradlew.bat```
+3. run in PowerShell: ```.\gradlew.bat run``` or double click ```run.bat```
