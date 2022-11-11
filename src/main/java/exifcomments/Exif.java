@@ -19,6 +19,8 @@ import java.util.Objects;
 
 public class Exif {
     String fileName;
+    String OGcreationTime;
+    String creationTime;
     String OGcreationDate;
     String creationDate;
     Path parentFolder;

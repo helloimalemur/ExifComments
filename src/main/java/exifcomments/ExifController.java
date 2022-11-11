@@ -46,6 +46,8 @@ public class ExifController {
     @FXML
     public TextField dateSetting = new TextField();
     @FXML
+    public TextField timeSetting = new TextField();
+    @FXML
     public TextField folderNameSetting = new TextField();
     @FXML
     public TextField nameSetting = new TextField();
@@ -132,6 +134,7 @@ public class ExifController {
             String newDescription =
                     ""
                             + exif.creationDate
+                            + exif.creationTime
                             + " : " + exif.parentFolder.getFileName().toString()//parent folder name
                             + " : " + exif.fileName
                             + " : " + exif.location;
