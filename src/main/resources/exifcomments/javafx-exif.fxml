@@ -97,19 +97,19 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextField id="fileNameField" fx:id="nameSetting" layoutX="14.0" layoutY="86.0" promptText="file name" />
-                        <TextField id="locationField" fx:id="locationSetting" layoutX="14.0" layoutY="62.0" promptText="location" />
-                        <TextField id="folderNameField" fx:id="folderNameSetting" layoutX="15.0" layoutY="110.0" promptText="folder name" />
                         <TextField id="dateField" fx:id="dateSetting" layoutX="15.0" layoutY="14.0" promptText="date" />
+                        <TextField id="dateField" fx:id="timeSetting" layoutX="15.0" layoutY="38.0" promptText="time" />
+                        <TextField id="locationField" fx:id="locationSetting" layoutX="14.0" layoutY="62.0" promptText="location" />
+                        <TextField id="fileNameField" fx:id="nameSetting" layoutX="14.0" layoutY="86.0" promptText="file name" />
+                        <TextField id="folderNameField" fx:id="folderNameSetting" layoutX="15.0" layoutY="110.0" promptText="folder name" />
                         <Button fx:id="clearSettingsButton" layoutX="34.0" layoutY="135.0" mnemonicParsing="false" onAction="#clearSettingsButtonPressed" prefHeight="24.0" prefWidth="132.0" text="Clear options" />
                         <Button fx:id="previewButton" layoutX="262.0" layoutY="410.0" mnemonicParsing="false" onAction="#previewButtonPressed" text="Preview" />
                         <Button fx:id="writeButton" layoutX="351.0" layoutY="410.0" mnemonicParsing="false" onAction="#writeButtonPressed" text="Write" />
                         <Button fx:id="loadButton" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" onAction="#loadButtonPressed" text="Load" />
                         <Button fx:id="clearButton" layoutX="476.0" layoutY="410.0" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
-                        <TextArea fx:id="previewExif" layoutX="20.0" layoutY="208.0" prefHeight="87.0" prefWidth="764.0" promptText="PreviewOne" />
+                        <TextArea fx:id="previewExif" layoutX="21.0" layoutY="192.0" prefHeight="87.0" prefWidth="764.0" promptText="PreviewOne" />
                         <TextArea fx:id="previewTwoExif" layoutX="21.0" layoutY="313.0" prefHeight="87.0" prefWidth="764.0" promptText="previewTwo" />
-                        <Label layoutX="21.0" layoutY="183.0" text="[date] [time] [location city and state] [file info] [location name]" />
-                        <TextField id="dateField" fx:id="timeSetting" layoutX="15.0" layoutY="38.0" promptText="time" />
+                        <Label layoutX="30.0" layoutY="297.0" prefHeight="16.0" prefWidth="560.0" text="[date] : [time] : [location city and state] : [file info] : [location name]" />
                      </children>
                   </AnchorPane>
               </items>

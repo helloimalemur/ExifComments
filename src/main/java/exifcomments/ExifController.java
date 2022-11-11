@@ -3,8 +3,6 @@ package exifcomments;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
 
@@ -135,9 +133,10 @@ public class ExifController {
                     ""
                             + exif.creationDate
                             + exif.creationTime
+                            + " : " + exif.location
                             + " : " + exif.parentFolder.getFileName().toString()//parent folder name
                             + " : " + exif.fileName
-                            + " : " + exif.location;
+                    ;
             exif.setNewDescription(newDescription);
             previewTwoExif.setText(previewTwoExif.getText() + newDescription + "\n");//print tags as loading
         });
@@ -209,7 +208,7 @@ public class ExifController {
         if (locationSetting.getText().length() > 0) {
             exif.location = locationSetting.getText();
         } else if (Objects.equals(locationSetting.getText(), "")) {
-            exif.location = exif.OGlocation;
+            exif.location = exif.OGLocation;
         }
     }
 
