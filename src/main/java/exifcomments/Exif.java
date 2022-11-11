@@ -32,7 +32,7 @@ public class Exif {
     ImageMetadata toBeWrittenMetaData;
     String newDescription;
     ArrayList<ImageMetadata.ImageMetadataItem> exifs = new ArrayList<>();
-    String locationSpec;
+    String locationDesc;
 
 
     Exif(Path path) {
@@ -72,12 +72,12 @@ public class Exif {
             if (imageMetadataItem.toString().startsWith("DateTime")) {
 //                creationDate = imageMetadataItem.toString();
                 System.out.println(imageMetadataItem.toString());
-                creationDate = imageMetadataItem.toString().split(" ")[1].substring(1)+" ";
+                creationDate = imageMetadataItem.toString().split(" ")[1].substring(1);
                 creationTime = imageMetadataItem.toString().split(" ")[2].substring(0,8);
                 OGcreationDate = creationDate;
                 OGcreationTime = creationTime;
                 OGLocation = location;
-                OGLocationSpec = locationSpec;
+                OGLocationSpec = locationDesc;
 
 
                 /////////
