@@ -131,8 +131,8 @@ public class ExifController {
                             + ifDateChanged(exif)
                             + " : " + ifTimeChanged(exif)
                             + " : " + ifLocationChanged(exif)
-                            + " : " + exif.fileName
-                            + " : " + exif.parentFolder.getFileName().toString()//parent folder name
+                            + " : " + ifFileNameChanged(exif)
+                            + " : " + ifFolderNameChanged(exif)
                             + " : " + ifLocationDescChanged(exif)
                     ;
             exif.setNewDescription(newDescription);
@@ -199,6 +199,22 @@ public class ExifController {
             return timeSetting.getText();
         } else if (Objects.equals(timeSetting.getText(), "")) {
             return exif.OGcreationTime;
+        }
+        return null;
+    }
+    public String ifFileNameChanged(Exif exif) {
+        if (nameSetting.getText().length() > 0) {
+            return nameSetting.getText();
+        } else if (Objects.equals(nameSetting.getText(), "")) {
+            return exif.fileName;
+        }
+        return null;
+    }
+    public String ifFolderNameChanged(Exif exif) {
+        if (folderNameSetting.getText().length() > 0) {
+            return folderNameSetting.getText();
+        } else if (Objects.equals(folderNameSetting.getText(), "")) {
+            return exif.parentFolder.getFileName().toString();
         }
         return null;
     }
