@@ -3,8 +3,6 @@ package exifcomments;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
 
@@ -46,11 +44,15 @@ public class ExifController {
     @FXML
     public TextField dateSetting = new TextField();
     @FXML
+    public TextField timeSetting = new TextField();
+    @FXML
     public TextField folderNameSetting = new TextField();
     @FXML
     public TextField nameSetting = new TextField();
     @FXML
     public TextField locationSetting = new TextField();
+    @FXML
+    public TextField locationDescSetting = new TextField();
 
     @FXML
     public TextArea previewExif = new TextArea();
@@ -101,7 +103,6 @@ public class ExifController {
     private void fileChooser() {
 //        emptyExifFilesList();
         System.out.println("working dir chooser");
-//        String path = dirFileChooser.showOpenDialog(null).getAbsolutePath();
         String path = dirFileChooser.showDialog(null).getAbsolutePath();
         System.out.println(path);
         //open file chooser and if is true if we chose something
@@ -111,7 +112,6 @@ public class ExifController {
             Exif ekt = new Exif(ek);//if metadata is not null, add it to our array of Exif
             boolean a = ekt.loadExif();
             if (ekt.metaData !=null && a) {
-//                exifAppPanel.ifLocationSetting(ekt);
                 exifArrayList.add(ekt);
             }
         });
@@ -121,28 +121,25 @@ public class ExifController {
             exif.loadExifTags();
         }
         printExifFilesList();//show files loaded in description text field
-//        exifDescriptionPreview();
     }
 
     public void exifDescriptionPreview() {
-//        String newDescription = "";
         previewTwoExif.setText("");
         exifArrayList.forEach(exif -> {
-            updateInfo(exif);
             String newDescription =
                     ""
-                            + exif.creationDate
-                            + " : " + exif.parentFolder.getFileName().toString()//parent folder name
-                            + " : " + exif.fileName
-                            + " : " + exif.location;
+                            + ifDateChanged(exif)
+                            + " : " + ifTimeChanged(exif)
+                            + " : " + ifLocationChanged(exif)
+                            + " : " + ifFileNameChanged(exif)
+                            + " : " + ifFolderNameChanged(exif)
+                            + " : " + ifLocationDescChanged(exif)
+                    ;
             exif.setNewDescription(newDescription);
             previewTwoExif.setText(previewTwoExif.getText() + newDescription + "\n");//print tags as loading
         });
     }
 
-    public String getLocationSetting(Exif exif) {
-        return exif.toString();
-    }
 
     public void writeDesc() {
         previewExif.setText("");
@@ -165,16 +162,11 @@ public class ExifController {
 
         });
     }
-
-
-
-
     public void emptyExifFilesList() {//drop loaded files / empty array
         exifArrayList.clear();
         previewExif.clear();
         previewTwoExif.clear();
     }
-
     public void printExifFilesList() {//print list of file paths currently loaded
         previewExif.clear();
         exifArrayList.forEach(exif -> {
@@ -188,33 +180,64 @@ public class ExifController {
 
     ///
     ///
-    private void updateInfo(Exif exif) {
-        ifLocationChanged(exif);
-        ifDateChanged(exif);
-        ifLocationSetting(exif);
+    ///
+    ///
+    ///
+    ///
 
-    }
 
-    public void ifDateChanged(Exif exif) {
+    public String ifDateChanged(Exif exif) {
         if (dateSetting.getText().length() > 0) {
-            exif.creationDate = dateSetting.getText();
+            return dateSetting.getText();
         } else if (Objects.equals(dateSetting.getText(), "")) {
-            exif.creationDate = exif.OGcreationDate;
+            return exif.OGcreationDate;
         }
+        return null;
     }
-    public void ifLocationChanged(Exif exif) {
-        if (locationSetting.getText().length() > 0) {
-            exif.location = locationSetting.getText();
-        } else if (Objects.equals(locationSetting.getText(), "")) {
-            exif.location = exif.OGlocation;
+    public String ifTimeChanged(Exif exif) {
+        if (timeSetting.getText().length() > 0) {
+            return timeSetting.getText();
+        } else if (Objects.equals(timeSetting.getText(), "")) {
+            return exif.OGcreationTime;
         }
+        return null;
+    }
+    public String ifFileNameChanged(Exif exif) {
+        if (nameSetting.getText().length() > 0) {
+            return nameSetting.getText();
+        } else if (Objects.equals(nameSetting.getText(), "")) {
+            return exif.fileName;
+        }
+        return null;
+    }
+    public String ifFolderNameChanged(Exif exif) {
+        if (folderNameSetting.getText().length() > 0) {
+            return folderNameSetting.getText();
+        } else if (Objects.equals(folderNameSetting.getText(), "")) {
+            return exif.parentFolder.getFileName().toString();
+        }
+        return null;
     }
 
-    public void ifLocationSetting(Exif exif) {
-        if (locationSetting.getText().length() != 0) {
-            exif.location = locationSetting.getText();
+    public String ifLocationChanged(Exif exif) {
+        if (locationSetting.getText().length() > 0) {
+            return locationSetting.getText();
+        } else if (Objects.equals(locationSetting.getText(), "")) {
+            return exif.OGLocation;
         }
+        return null;
     }
+    public String ifLocationDescChanged(Exif exif) {
+        if (locationDescSetting.getText().length() > 0) {
+//            exif.locationDesc = locationDescSetting.getText();
+            return locationDescSetting.getText();
+        } else if (Objects.equals(locationDescSetting.getText(), "")) {
+            return exif.OGLocationSpec;
+        }
+        return null;
+    }
+
+
 
 
 }

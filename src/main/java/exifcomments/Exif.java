@@ -19,16 +19,20 @@ import java.util.Objects;
 
 public class Exif {
     String fileName;
+    String OGcreationTime;
+    String creationTime;
     String OGcreationDate;
     String creationDate;
     Path parentFolder;
     Path path;
-    String OGlocation;
+    String OGLocation;
     String location;
+    String OGLocationSpec;
     ImageMetadata metaData;
     ImageMetadata toBeWrittenMetaData;
     String newDescription;
     ArrayList<ImageMetadata.ImageMetadataItem> exifs = new ArrayList<>();
+    String locationDesc;
 
 
     Exif(Path path) {
@@ -67,10 +71,15 @@ public class Exif {
         exifs.forEach(imageMetadataItem -> {
             if (imageMetadataItem.toString().startsWith("DateTime")) {
 //                creationDate = imageMetadataItem.toString();
-                creationDate = imageMetadataItem.toString().split(" ")[1].substring(1)
-                        +" "+ imageMetadataItem.toString().split(" ")[1].substring(1);
+                System.out.println(imageMetadataItem.toString());
+                creationDate = imageMetadataItem.toString().split(" ")[1].substring(1);
+                creationTime = imageMetadataItem.toString().split(" ")[2].substring(0,8);
                 OGcreationDate = creationDate;
-                OGlocation = location;
+                OGcreationTime = creationTime;
+                OGLocation = location;
+                OGLocationSpec = locationDesc;
+
+
                 /////////
 
             }
@@ -185,5 +194,7 @@ public class Exif {
     public String getLocation(){
         return this.location;
     }
+
+
 
 }
