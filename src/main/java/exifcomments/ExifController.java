@@ -162,7 +162,7 @@ public class ExifController {
     private void fileChooser() {
 //        emptyExifFilesList();
         System.out.println("working dir chooser");
-        String path = dirFileChooser.showDialog(null).getAbsolutePath();//open chooser window
+        String path = String.valueOf(dirFileChooser.showDialog(null));//open chooser window
         System.out.println(path);
         if (path!=null) {
             fileLoader.setPath(path);//set fileloader path to the dir we selected
