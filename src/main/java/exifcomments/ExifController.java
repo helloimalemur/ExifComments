@@ -198,7 +198,6 @@ public class ExifController {
         }
         return null;
     }
-
     public String ifTimeChanged(Exif exif) {
         if (timeSetting.getText().length() > 0) {
             return timeSetting.getText();
@@ -231,7 +230,6 @@ public class ExifController {
         }
         return null;
     }
-
     public String ifLocationDescChanged(Exif exif) {
         if (locationDescSetting.getText().length() > 0) {
             return locationDescSetting.getText();
