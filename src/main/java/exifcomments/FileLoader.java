@@ -14,9 +14,8 @@ public class FileLoader {
 
     FileLoader() {}
 
-    public void build_files_list(char arg) {
+    public void build_files_list() {
         Path dir = Paths.get(path);// path is dir
-        recursiveOption = arg;// 'Y' or 'N'//this really isn't used at the moment
 
         try (DirectoryStream<Path> files = Files.newDirectoryStream(dir)) {
             files.forEach(et -> {//iterates over Directory stream
