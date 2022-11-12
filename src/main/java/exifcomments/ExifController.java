@@ -99,34 +99,16 @@ public class ExifController {
         exifDescriptionPreview();
     }
 
-
-    private void fileChooser() {
-//        emptyExifFilesList();
-        System.out.println("working dir chooser");
-        String path = dirFileChooser.showDialog(null).getAbsolutePath();
-        System.out.println(path);
-        //open file chooser and if is true if we chose something
-        fileLoader.setPath(path);//set fileloader path to the dir we selected
-        fileLoader.build_files_list('Y');//folder recursion (we haven't implemented the ability to disable yet)
-        fileLoader.getFilesList().forEach(ek -> {
-            Exif ekt = new Exif(ek);//if metadata is not null, add it to our array of Exif
-            boolean a = ekt.loadExif();
-            if (ekt.metaData !=null && a) {
-                exifArrayList.add(ekt);
-            }
-        });
-        fileLoader.clearFilesList();
-
-        for (Exif exif : exifArrayList) {//after checking for any null metadata, load tags into exif ArrayList
-            exif.loadExifTags();
-        }
-        printExifFilesList();//show files loaded in description text field
-    }
-
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
     public void exifDescriptionPreview() {
         previewTwoExif.setText("");
-        exifArrayList.forEach(exif -> {
-            String newDescription =
+        exifArrayList.forEach(exif -> {//iterate over list of Exif
+            String newDescription =//create a new description String to be written to UserComment Exif tag of target file
                     ""
                             + ifDateChanged(exif)
                             + " : " + ifTimeChanged(exif)
@@ -135,18 +117,18 @@ public class ExifController {
                             + " : " + ifFolderNameChanged(exif)
                             + " : " + ifLocationDescChanged(exif)
                     ;
-            exif.setNewDescription(newDescription);
-            previewTwoExif.setText(previewTwoExif.getText() + newDescription + "\n");//print tags as loading
+            exif.setNewDescription(newDescription);//set description string
+            previewTwoExif.setText(previewTwoExif.getText() + newDescription + "\n");//display string to be written in previewTwo field
         });
     }
 
 
     public void writeDesc() {
-        previewExif.setText("");
-        for (Exif exif: exifArrayList) {
+        previewExif.setText("");//clear preview
+        for (Exif exif: exifArrayList) {//iterate over list of Exif
             System.out.println("Writing.. " + exif.path.toString());
             try {
-                exif.writeNewDecription(exif.newDescription);
+                exif.writeNewDecription(exif.newDescription);//attempt to write new metadata
             } catch (ImageWriteException | IOException | ImageReadException e) {
                 throw new RuntimeException(e);
             }
@@ -162,8 +144,9 @@ public class ExifController {
 
         });
     }
-    public void emptyExifFilesList() {//drop loaded files / empty array
-        exifArrayList.clear();
+
+    public void emptyExifFilesList() {
+        exifArrayList.clear();//clear Exif list
         previewExif.clear();
         previewTwoExif.clear();
     }
@@ -176,7 +159,27 @@ public class ExifController {
         System.out.println("\n");
     }
 
+    private void fileChooser() {
+//        emptyExifFilesList();
+        System.out.println("working dir chooser");
+        String path = dirFileChooser.showDialog(null).getAbsolutePath();//open chooser window
+        System.out.println(path);
+        fileLoader.setPath(path);//set fileloader path to the dir we selected
+        fileLoader.build_files_list();//call method which uses folder recursion to create files list
+        fileLoader.getFilesList().forEach(ek -> {//iterate over files list
+            Exif ekt = new Exif(ek);//Create a new Exif object for each file
+            boolean a = ekt.loadExif();//attempt to load Exif data, if unsuccessful skip file
+            if (ekt.metaData !=null && a) {//if metadata is not null
+                exifArrayList.add(ekt);//add it to our array of Exif
+            }
+        });
+        fileLoader.clearFilesList();
 
+        for (Exif exif : exifArrayList) {//after checking for any null metadata, load tags into exif ArrayList
+            exif.loadExifTags();
+        }
+        printExifFilesList();//show files loaded in description text field
+    }
 
     ///
     ///
@@ -184,7 +187,6 @@ public class ExifController {
     ///
     ///
     ///
-
 
     public String ifDateChanged(Exif exif) {
         if (dateSetting.getText().length() > 0) {
@@ -194,6 +196,7 @@ public class ExifController {
         }
         return null;
     }
+
     public String ifTimeChanged(Exif exif) {
         if (timeSetting.getText().length() > 0) {
             return timeSetting.getText();
@@ -218,7 +221,6 @@ public class ExifController {
         }
         return null;
     }
-
     public String ifLocationChanged(Exif exif) {
         if (locationSetting.getText().length() > 0) {
             return locationSetting.getText();
@@ -227,6 +229,7 @@ public class ExifController {
         }
         return null;
     }
+
     public String ifLocationDescChanged(Exif exif) {
         if (locationDescSetting.getText().length() > 0) {
 //            exif.locationDesc = locationDescSetting.getText();
@@ -236,8 +239,4 @@ public class ExifController {
         }
         return null;
     }
-
-
-
-
 }
