@@ -234,7 +234,6 @@ public class ExifController {
 
     public String ifLocationDescChanged(Exif exif) {
         if (locationDescSetting.getText().length() > 0) {
-//            exif.locationDesc = locationDescSetting.getText();
             return locationDescSetting.getText();
         } else if (Objects.equals(locationDescSetting.getText(), "")) {
             return exif.OGLocationSpec;
