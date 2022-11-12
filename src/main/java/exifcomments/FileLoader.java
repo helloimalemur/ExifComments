@@ -25,9 +25,8 @@ public class FileLoader {
                     throw new RuntimeException(e);
                 }
             });
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException(e);
         }
     }
     public void loadDirRecurisve(Path e) throws IOException {//recursively drop through folders in search of files
@@ -36,14 +35,16 @@ public class FileLoader {
                 || e.toString().toLowerCase().endsWith(".jpg"))) {// a file type
             filesList.add(e); // add it to our temporary array
         } else if (Files.isDirectory(e)) { // otherwise, if it's a directory
-            DirectoryStream<Path> fi = Files.newDirectoryStream(e);// make a Directory stream out of the directory
-            fi.forEach(eh -> {// iterate over this directory stream
-                try {
-                    loadDirRecurisve(eh);//and implement recursion
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
+            try(DirectoryStream<Path> fi = Files.newDirectoryStream(e))// make a Directory stream out of the directory
+            {
+                fi.forEach(eh -> {// iterate over this directory stream
+                    try {
+                        loadDirRecurisve(eh);//and implement recursion
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                });
+            }
         }
     }
 
