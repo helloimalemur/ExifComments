@@ -110,14 +110,24 @@ public class ExifController {
     public void exifDescriptionPreview() {
         previewTwoExif.setText("");
         exifArrayList.forEach(exif -> {//iterate over list of Exif
+            String[] fileNameString = ifFileNameChanged(exif).substring(0, ifFileNameChanged(exif).length()-4).split(" ");
+            String[] folderNameString = ifFolderNameChanged(exif).substring(0, ifFolderNameChanged(exif).length()).split(" ");
             String newDescription =//create a new description String to be written to UserComment Exif tag of target file
                     ""
                             + ifDateChanged(exif)
                             + " : " + ifTimeChanged(exif)
                             + " : " + ifLocationChanged(exif)
-                            + " : " + ifFileNameChanged(exif)
-                            + " : " + ifFolderNameChanged(exif)
+                            + " : (" + fileNameString[fileNameString.length-1] // number at end of file name ex; 'bear creek 052.jpg' -> 052
+                            + ", " + folderNameString[folderNameString.length-1] + ")" //number at end of folder name ex; 'N 0003' -> 0003
                             + " : " + ifLocationDescChanged(exif)
+
+//                            + ifDateChanged(exif)
+//                            + " : " + ifTimeChanged(exif)
+//                            + " : " + ifLocationChanged(exif)
+//                            + " : " + ifFileNameChanged(exif)
+//                            + " : " + ifFolderNameChanged(exif)
+//                            + " : " + ifLocationDescChanged(exif)
+//
                     ;
             exif.setNewDescription(newDescription);//set description string
             previewTwoExif.setText(previewTwoExif.getText() + newDescription + "\n");//display string to be written in previewTwo field
