@@ -38,10 +38,8 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-mainClassName = 'exifccomments.ExifApplication'
 application {
-    mainModule = 'exifcomments'
-    mainClass = 'exifcomments.ExifApplication'
+    mainClass = 'net.koonts.exifcomments.ExifApplication'
 }
 
 

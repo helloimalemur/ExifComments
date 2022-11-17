@@ -1,4 +1,4 @@
-package exifcomments;
+package net.koonts.exifcomments;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;

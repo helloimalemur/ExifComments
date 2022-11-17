@@ -1,4 +1,4 @@
-package exifcomments;
+package net.koonts.exifcomments;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,8 +7,6 @@ import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

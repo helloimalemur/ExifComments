@@ -1,4 +1,4 @@
-package exifcomments;
+package net.koonts.exifcomments;
 
 
 import org.apache.commons.imaging.ImageReadException;
