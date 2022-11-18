@@ -45,7 +45,8 @@ public class Exif {
 
     public boolean loadExif() {
         if (path.toFile().exists() && !path.toFile().isDirectory()) {
-            if ((path.toString().toLowerCase().endsWith(".nef") || path.toString().toLowerCase().endsWith(".jpg"))) {
+            if ((path.toString().toLowerCase().endsWith(".nef")
+                || path.toString().toLowerCase().endsWith(".jpg"))) {
                 try {//TODO: check if corrupt/valid
                     metaData = Imaging.getMetadata(path.toFile());/////////////
                     return true;
