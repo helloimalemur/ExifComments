@@ -97,8 +97,9 @@ public class Exif {
 
 //        System.out.println(path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.NEF");
 //        String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.NEF";
-        String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.JPG";
-        Path path2 = Path.of(tmp);
+//        String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.JPG";
+//        Path path2 = Path.of(tmp);
+        Path path2 = Path.of(path.toAbsolutePath().toString().substring(0, (path.toAbsolutePath().toString().lastIndexOf('.'))) + "_tmp.JPG");
         File inF = new File(path.toUri());
         File outF = new File(path2.toUri());
         changeExifMetadata(inF, outF, newDescription);

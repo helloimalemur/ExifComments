@@ -180,12 +180,11 @@ public class ExifController {
             fileLoader.getFilesList().forEach(ek -> {//iterate over files list
                 Exif ekt = new Exif(ek);//Create a new Exif object for each file
                 boolean a = ekt.loadExif();//attempt to load Exif data, if unsuccessful skip file
-                if (!a){
-                    System.out.println("NOT Loaded (no Exif data): " + ek);
-                } else {System.out.println("Loaded: " + ek);}
+
                 if (ekt.metaData !=null && a) {//if metadata is not null
                     exifArrayList.add(ekt);//add it to our array of Exif
-                }
+                    System.out.println("Loaded: " + ekt.path.toString());
+                } else {System.out.println("NOT Loaded (no Exif data): " + ekt.path.toString());}
             });
         }
         fileLoader.clearFilesList();
