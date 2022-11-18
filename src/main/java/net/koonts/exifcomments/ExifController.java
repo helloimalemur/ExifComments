@@ -163,23 +163,26 @@ public class ExifController {
     public void printExifFilesList() {//print list of file paths currently loaded
         previewExif.clear();
         exifArrayList.forEach(exif -> {
-            System.out.println(exif.path.toString());
+//            System.out.println(exif.path.toString());
             previewExif.setText(previewExif.getText() + exif.path.toString() + "\n");
         });
-        System.out.println("\n");
+//        System.out.println("\n");
     }
 
     private void fileChooser() {
 //        emptyExifFilesList();
         System.out.println("working dir chooser");
         String path = String.valueOf(dirFileChooser.showDialog(null));//open chooser window
-        System.out.println(path);
+//        System.out.println(path);
         if (path!=null) {
             fileLoader.setPath(path);//set fileloader path to the dir we selected
             fileLoader.build_files_list();//call method which uses folder recursion to create files list
             fileLoader.getFilesList().forEach(ek -> {//iterate over files list
                 Exif ekt = new Exif(ek);//Create a new Exif object for each file
                 boolean a = ekt.loadExif();//attempt to load Exif data, if unsuccessful skip file
+                if (!a){
+                    System.out.println("NOT Loaded (no Exif data): " + ek);
+                } else {System.out.println("Loaded: " + ek);}
                 if (ekt.metaData !=null && a) {//if metadata is not null
                     exifArrayList.add(ekt);//add it to our array of Exif
                 }

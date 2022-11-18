@@ -62,16 +62,16 @@ public class Exif {
         exifs.addAll(metaData.getItems());
 //        jpegMetadata.findEXIFValueWithExactMatch(tagInfo)
 //        exifs.forEach(imageMetadataItem -> System.out.println(imageMetadataItem + "\n"));
-        exifs.forEach(imageMetadataItem -> {
-            if (imageMetadataItem.toString().startsWith("UserComment")) {
-                System.out.println(imageMetadataItem + "\n");
-            }
-        });
+//        exifs.forEach(imageMetadataItem -> {
+//            if (imageMetadataItem.toString().startsWith("UserComment")) {
+//                System.out.println(imageMetadataItem + "\n");
+//            }
+//        });
 
         exifs.forEach(imageMetadataItem -> {
             if (imageMetadataItem.toString().startsWith("DateTime")) {
 //                creationDate = imageMetadataItem.toString();
-                System.out.println(imageMetadataItem.toString());
+//                System.out.println(imageMetadataItem.toString());
                 creationDate = imageMetadataItem.toString().split(" ")[1].substring(1);
                 creationTime = imageMetadataItem.toString().split(" ")[2].substring(0,8);
                 OGcreationDate = creationDate;
@@ -92,7 +92,7 @@ public class Exif {
     public void writeNewDecription(String newDescription) throws ImageWriteException, IOException, ImageReadException {
         //write newDescription to UserComment tag
 
-        System.out.println(path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.NEF");
+//        System.out.println(path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.NEF");
 //        String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.NEF";
         String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.JPG";
         Path path2 = Path.of(tmp);
