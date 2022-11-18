@@ -32,7 +32,10 @@ public class FileLoader {
     public void loadDirRecurisve(Path e) throws IOException {//recursively drop through folders in search of files
         if (!Files.isDirectory(e)//if this potential file is not a directory
                 && (e.toString().toLowerCase().endsWith(".nef")// and matches
+
                 || e.toString().toLowerCase().endsWith(".jpg")
+                || e.toString().toLowerCase().endsWith(".jpeg")
+
                 || e.toString().toLowerCase().endsWith(".tif")
                 || e.toString().toLowerCase().endsWith(".tiff")
         )
