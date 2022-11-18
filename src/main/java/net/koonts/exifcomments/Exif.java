@@ -13,7 +13,9 @@ import org.apache.commons.imaging.formats.tiff.write.TiffOutputDirectory;
 import org.apache.commons.imaging.formats.tiff.write.TiffOutputSet;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -96,7 +98,12 @@ public class Exif {
 //        String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.NEF";
         String tmp = path.toAbsolutePath().toString().substring(0,(path.toAbsolutePath().toString().lastIndexOf('.')))+"_tmp.JPG";
         Path path2 = Path.of(tmp);
-        changeExifMetadata(new File(path.toUri()), new File(path2.toUri()), newDescription);
+        File inF = new File(path.toUri());
+        File outF = new File(path2.toUri());
+        changeExifMetadata(inF, outF, newDescription);
+        inF.delete();
+        Files.move(outF.toPath(), inF.toPath());
+
     }
 
 
@@ -129,29 +136,24 @@ public class Exif {
                     }
                 }
             } catch (ImageWriteException e) {
-                //write as tiff instead
-                final TiffImageMetadata tiffImageMetadata = (TiffImageMetadata) metadata;
-                if (tiffImageMetadata != null) {
-                    outputSet = tiffImageMetadata.getOutputSet();
-                }
+               System.out.println(e.getMessage());
             }
 
             if (null == outputSet) {
                 outputSet = new TiffOutputSet();
             }
 
-            {
-                final TiffOutputDirectory exifDirectory = outputSet.getOrCreateExifDirectory();
-                // make sure to remove old value if present (this method will
-                // not fail if the tag does not exist).
-                exifDirectory.removeField(ExifTagConstants.EXIF_TAG_USER_COMMENT);
-                if (Objects.equals(newDescription, "")) {
+            final TiffOutputDirectory exifDirectory = outputSet.getOrCreateExifDirectory();
+            // make sure to remove old value if present (this method will
+            // not fail if the tag does not exist).
+            exifDirectory.removeField(ExifTagConstants.EXIF_TAG_USER_COMMENT);
+            if (Objects.equals(newDescription, "")) {
 
-                    exifDirectory.add(ExifTagConstants.EXIF_TAG_USER_COMMENT, "");
-                } else {
-                    exifDirectory.add(ExifTagConstants.EXIF_TAG_USER_COMMENT, newDescription);
-                }
+                exifDirectory.add(ExifTagConstants.EXIF_TAG_USER_COMMENT, "");
+            } else {
+                exifDirectory.add(ExifTagConstants.EXIF_TAG_USER_COMMENT, newDescription);
             }
+
             //https://stackoverflow.com/questions/40241030/write-exif-data-to-tiff-file-using-apache-commons-imaging
             new ExifRewriter().updateExifMetadataLossless(imageFile, os,
                     outputSet);
