@@ -80,9 +80,11 @@ public class ExifController {
     @FXML
     public void clearSettingsButtonPressed() {
         dateSetting.clear();
+        timeSetting.clear();
         folderNameSetting.clear();
         nameSetting.clear();
         locationSetting.clear();
+        locationDescSetting.clear();
     }
     @FXML
     public void loadButtonPressed() {
