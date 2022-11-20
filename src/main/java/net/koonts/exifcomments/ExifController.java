@@ -208,7 +208,7 @@ public class ExifController {
         } else if (Objects.equals(dateSetting.getText(), "")) {
             return exif.OGcreationDate;
         }
-        return null;
+        return "";
     }
     public String ifTimeChanged(Exif exif) {
         if (timeSetting.getText().length() > 0) {
@@ -216,7 +216,7 @@ public class ExifController {
         } else if (Objects.equals(timeSetting.getText(), "")) {
             return exif.OGcreationTime;
         }
-        return null;
+        return "";
     }
     public String ifFileNameChanged(Exif exif) {
         if (nameSetting.getText().length() > 0) {
@@ -224,7 +224,7 @@ public class ExifController {
         } else if (Objects.equals(nameSetting.getText(), "")) {
             return exif.fileName;
         }
-        return null;
+        return "";
     }
     public String ifFolderNameChanged(Exif exif) {
         if (folderNameSetting.getText().length() > 0) {
@@ -232,7 +232,7 @@ public class ExifController {
         } else if (Objects.equals(folderNameSetting.getText(), "")) {
             return exif.parentFolder.getFileName().toString();
         }
-        return null;
+        return "";
     }
     public String ifLocationChanged(Exif exif) {
         if (locationSetting.getText().length() > 0) {
@@ -240,7 +240,7 @@ public class ExifController {
         } else if (Objects.equals(locationSetting.getText(), "")) {
             return exif.OGLocation;
         }
-        return null;
+        return "";
     }
     public String ifLocationDescChanged(Exif exif) {
         if (locationDescSetting.getText().length() > 0) {
@@ -248,6 +248,6 @@ public class ExifController {
         } else if (Objects.equals(locationDescSetting.getText(), "")) {
             return exif.OGLocationSpec;
         }
-        return null;
+        return "";
     }
 }
