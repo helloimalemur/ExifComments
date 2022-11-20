@@ -203,7 +203,7 @@ public class ExifController {
     ///
 
     public String ifDateChanged(Exif exif) {
-        if (dateSetting.getText().length() > 0 && dateSetting.getText()!=null) {
+        if (dateSetting.getText().length() > 0) {
             return Objects.requireNonNullElse(dateSetting.getText(),"");
 
         } else if (Objects.equals(dateSetting.getText(), "") && dateSetting.getText()!=null) {
@@ -212,7 +212,7 @@ public class ExifController {
         return "";
     }
     public String ifTimeChanged(Exif exif) {
-        if (timeSetting.getText().length() > 0 && timeSetting.getText()!=null) {
+        if (timeSetting.getText().length() > 0) {
             return Objects.requireNonNullElse(timeSetting.getText(), "");
         } else if (Objects.equals(timeSetting.getText(), "") && timeSetting.getText()!=null) {
             return Objects.requireNonNullElse(exif.OGcreationTime, "");
@@ -220,7 +220,7 @@ public class ExifController {
         return "";
     }
     public String ifFileNameChanged(Exif exif) {
-        if (nameSetting.getText().length() > 0 && nameSetting.getText()!= null) {
+        if (nameSetting.getText().length() > 0) {
             return Objects.requireNonNullElse(nameSetting.getText(), "");
         } else if (Objects.equals(nameSetting.getText(), "") && nameSetting.getText()!= null) {
             return Objects.requireNonNullElse(exif.fileName, "");
@@ -228,7 +228,7 @@ public class ExifController {
         return "";
     }
     public String ifFolderNameChanged(Exif exif) {
-        if (folderNameSetting.getText().length() > 0 && folderNameSetting.getText()!=null) {
+        if (folderNameSetting.getText().length() > 0) {
             return Objects.requireNonNullElse(folderNameSetting.getText(), "");
         } else if (Objects.equals(folderNameSetting.getText(), "") && folderNameSetting.getText()!=null) {
             return Objects.requireNonNullElse(exif.parentFolder.getFileName().toString(), "");
@@ -236,7 +236,7 @@ public class ExifController {
         return "";
     }
     public String ifLocationChanged(Exif exif) {
-        if (locationSetting.getText().length() > 0 && locationSetting.getText()!=null) {
+        if (locationSetting.getText().length() > 0) {
             return Objects.requireNonNullElse(locationSetting.getText(), "");
         } else if (Objects.equals(locationSetting.getText(), "") && locationSetting.getText()!=null) {
             return Objects.requireNonNullElse(exif.OGLocation, "");
@@ -244,7 +244,7 @@ public class ExifController {
         return "";
     }
     public String ifLocationDescChanged(Exif exif) {
-        if (locationDescSetting.getText().length() > 0 && locationDescSetting.getText()!=null) {
+        if (locationDescSetting.getText().length() > 0) {
             return Objects.requireNonNullElse(locationDescSetting.getText(), "");
         } else if (Objects.equals(locationDescSetting.getText(), "") && locationDescSetting.getText()!=null) {
             return Objects.requireNonNullElse(exif.OGLocationSpec, "");
