@@ -247,14 +247,18 @@ public class ExifController {
             if (Objects.equals(msg,"")) {
                 return " ";
             } else {
-                return "(" + msg + ", ";
+//                return "(" + msg + ", ";
+                String[] msgs = msg.split(" ");
+                return "(" + msgs[msgs.length-1].substring(0, msgs[msgs.length-1].length()-4) + ", ";
             }
         } else if (Objects.equals(nameSetting.getText(), "") && nameSetting.getText()!= null) {
             String msg = Objects.requireNonNullElse(exif.fileName, "");
             if (Objects.equals(msg,"")) {
                 return " ";
             } else {
-                return "(" + msg + ", ";
+//                return "(" + msg + ", ";
+                String[] msgs = msg.split(" ");
+                return "(" + msgs[msgs.length-1].substring(0, msgs[msgs.length-1].length()-4) + ", ";
             }
         }
         return " ";
@@ -265,14 +269,19 @@ public class ExifController {
             if (Objects.equals(msg,"")) {
                 return " ";
             } else {
-                return msg + ")";
+//                return msg + ")";
+                String[] msgs = msg.split(" ");
+                return msgs[msgs.length-1] + ")";
+
             }
         } else if (Objects.equals(folderNameSetting.getText(), "") && folderNameSetting.getText()!=null) {
             String msg = Objects.requireNonNullElse(exif.parentFolder.getFileName().toString(), "");
             if (Objects.equals(msg,"")) {
                 return " ";
             } else {
-                return msg + ")";
+//                return msg + ")";
+                String[] msgs = msg.split(" ");
+                return msgs[msgs.length-1] + ")";
             }
         }
         return " ";
