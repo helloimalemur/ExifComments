@@ -46,10 +46,6 @@ public class ExifController {
     @FXML
     public TextField timeSetting = new TextField();
     @FXML
-    public TextField folderNameSetting = new TextField();
-    @FXML
-    public TextField nameSetting = new TextField();
-    @FXML
     public TextField locationSetting = new TextField();
     @FXML
     public TextField locationDescSetting = new TextField();
@@ -81,8 +77,6 @@ public class ExifController {
     public void clearSettingsButtonPressed() {
         dateSetting.clear();
         timeSetting.clear();
-        folderNameSetting.clear();
-        nameSetting.clear();
         locationSetting.clear();
         locationDescSetting.clear();
     }
@@ -208,7 +202,7 @@ public class ExifController {
         if (dateSetting.getText().length() > 0) {
             String msg = Objects.requireNonNullElse(dateSetting.getText(),"");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return msg + " : ";
             }
@@ -216,110 +210,85 @@ public class ExifController {
         } else if (Objects.equals(dateSetting.getText(), "") && dateSetting.getText()!=null) {
             String msg = Objects.requireNonNullElse(exif.OGcreationDate, "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return msg + " : ";
             }
         }
-        return " ";
+        return "";
     }
     public String ifTimeChanged(Exif exif) {
         if (timeSetting.getText().length() > 0) {
             String msg = Objects.requireNonNullElse(timeSetting.getText(), "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return msg + " : ";
             }
         } else if (Objects.equals(timeSetting.getText(), "") && timeSetting.getText()!=null) {
             String msg = Objects.requireNonNullElse(exif.OGcreationTime, "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return msg + " : ";
             }
         }
-        return " ";
+        return "";
     }
     public String ifFileNameChanged(Exif exif) {
-        if (nameSetting.getText().length() > 0) {
-            String msg = Objects.requireNonNullElse(nameSetting.getText(), "");
-            if (Objects.equals(msg,"")) {
-                return " ";
-            } else {
+        String msg = Objects.requireNonNullElse(exif.fileName, "");
+        if (Objects.equals(msg,"")) {
+            return exif.fileName;
+        } else {
 //                return "(" + msg + ", ";
-                String[] msgs = msg.split(" ");
-                return "(" + msgs[msgs.length-1].substring(0, msgs[msgs.length-1].length()-4) + ", ";
-            }
-        } else if (Objects.equals(nameSetting.getText(), "") && nameSetting.getText()!= null) {
-            String msg = Objects.requireNonNullElse(exif.fileName, "");
-            if (Objects.equals(msg,"")) {
-                return " ";
-            } else {
-//                return "(" + msg + ", ";
-                String[] msgs = msg.split(" ");
-                return "(" + msgs[msgs.length-1].substring(0, msgs[msgs.length-1].length()-4) + ", ";
-            }
+            String[] msgs = msg.split(" ");
+            return "(" + msgs[msgs.length-1].substring(0, msgs[msgs.length-1].length()-4) + ", ";
         }
-        return " ";
     }
     public String ifFolderNameChanged(Exif exif) {
-        if (folderNameSetting.getText().length() > 0) {
-            String msg = Objects.requireNonNullElse(folderNameSetting.getText(), "");
-            if (Objects.equals(msg,"")) {
-                return " ";
-            } else {
+        String msg = Objects.requireNonNullElse(exif.parentFolder.getFileName().toString(), "");
+        if (Objects.equals(msg,"")) {
+            return exif.parentFolder.toString();
+        } else {
 //                return msg + ")";
-                String[] msgs = msg.split(" ");
-                return msgs[msgs.length-1] + ")";
-
-            }
-        } else if (Objects.equals(folderNameSetting.getText(), "") && folderNameSetting.getText()!=null) {
-            String msg = Objects.requireNonNullElse(exif.parentFolder.getFileName().toString(), "");
-            if (Objects.equals(msg,"")) {
-                return " ";
-            } else {
-//                return msg + ")";
-                String[] msgs = msg.split(" ");
-                return msgs[msgs.length-1] + ")";
-            }
+            String[] msgs = msg.split(" ");
+            return msgs[msgs.length-1] + ")";
         }
-        return " ";
     }
     public String ifLocationChanged(Exif exif) {
         if (locationSetting.getText().length() > 0) {
             String msg = Objects.requireNonNullElse(locationSetting.getText(), "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return msg + " : ";
             }
         } else if (Objects.equals(locationSetting.getText(), "") && locationSetting.getText()!=null) {
             String msg = Objects.requireNonNullElse(exif.OGLocation, "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return msg + " : ";
             }
         }
-        return " ";
+        return "";
     }
     public String ifLocationDescChanged(Exif exif) {
         if (locationDescSetting.getText().length() > 0) {
             String msg = Objects.requireNonNullElse(locationDescSetting.getText(), "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return " : " + msg;
             }
         } else if (Objects.equals(locationDescSetting.getText(), "") && locationDescSetting.getText()!=null) {
             String msg = Objects.requireNonNullElse(exif.OGLocationSpec, "");
             if (Objects.equals(msg,"")) {
-                return " ";
+                return "";
             } else {
                 return " : " + msg;
             }
         }
-        return " ";
+        return "";
     }
 }
