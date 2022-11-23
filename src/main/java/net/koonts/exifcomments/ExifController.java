@@ -173,15 +173,16 @@ public class ExifController {
         if (path!=null) {
             fileLoader.setPath(path);//set fileloader path to the dir we selected
             fileLoader.build_files_list();//call method which uses folder recursion to create files list
-            fileLoader.getFilesList().forEach(ek -> {//iterate over files list
-                Exif ekt = new Exif(ek);//Create a new Exif object for each file
-                boolean a = ekt.loadExif();//attempt to load Exif data, if unsuccessful skip file
+            if (!fileLoader.getFilesList().isEmpty()) {
+                fileLoader.getFilesList().forEach(ek -> {//iterate over files list
+                    Exif ekt = new Exif(ek);//Create a new Exif object for each file
+                    boolean a = ekt.loadExif();//attempt to load Exif data, if unsuccessful skip file
 
-                if (ekt.metaData !=null && a) {//if metadata is not null
-                    exifArrayList.add(ekt);//add it to our array of Exif
-                    System.out.println("Loaded: " + ekt.path.toString());
-                } else {System.out.println("NOT Loaded (no Exif data): " + ekt.path.toString());}
-            });
+                    if (ekt.metaData !=null && a) {//if metadata is not null
+                        exifArrayList.add(ekt);//add it to our array of Exif
+                    }
+                });
+            }
         }
         fileLoader.clearFilesList();
 

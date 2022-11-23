@@ -49,9 +49,21 @@ public class Exif {
                 || path.toString().toLowerCase().endsWith(".jpg"))) {
                 try {//TODO: check if corrupt/valid
                     metaData = Imaging.getMetadata(path.toFile());/////////////
+                    ///
+                    if (!metaData.getItems().isEmpty()) {
+                        for (ImageMetadata.ImageMetadataItem item : metaData.getItems()) {
+                            if (item.toString().startsWith("UserComment") && item.toString().substring(13).length()>2) {
+                                System.out.println("Not Loaded (UserComment present): " + path.toString());
+                                return false;// if image already has UserComment do not load
+                            }
+                        };
+                    }
+                    ///
+                    System.out.println("Loaded (UserComment present): " + path.toString());
                     return true;
                 } catch (ImageReadException | IOException | IllegalArgumentException exception) {
                     System.out.println(exception.getMessage());
+                    System.out.println("Not Loaded (no exif data): " + path.toString());
                     return false;
                 }
             }
@@ -62,31 +74,26 @@ public class Exif {
         return false;
     }
     public void loadExifTags() {
-        exifs.addAll(metaData.getItems());
-//        jpegMetadata.findEXIFValueWithExactMatch(tagInfo)
-//        exifs.forEach(imageMetadataItem -> System.out.println(imageMetadataItem + "\n"));
-//        exifs.forEach(imageMetadataItem -> {
-//            if (imageMetadataItem.toString().startsWith("UserComment")) {
-//                System.out.println(imageMetadataItem + "\n");
-//            }
-//        });
+        if (!metaData.getItems().isEmpty()) {
+            exifs.addAll(metaData.getItems());
+        }
 
-        exifs.forEach(imageMetadataItem -> {
-            if (imageMetadataItem.toString().startsWith("DateTime")) {
-//                creationDate = imageMetadataItem.toString();
-//                System.out.println(imageMetadataItem.toString());
-                creationDate = imageMetadataItem.toString().split(" ")[1].substring(1);
-                creationTime = imageMetadataItem.toString().split(" ")[2].substring(0,8);
-                OGcreationDate = creationDate;
-                OGcreationTime = creationTime;
-                OGLocation = location;
-                OGLocationSpec = locationDesc;
+        if (!exifs.isEmpty()) {
+            exifs.forEach(imageMetadataItem -> {
+                if (imageMetadataItem.toString().startsWith("DateTime")) {
+                    creationDate = imageMetadataItem.toString().split(" ")[1].substring(1);
+                    creationTime = imageMetadataItem.toString().split(" ")[2].substring(0,8);
+                    OGcreationDate = creationDate;
+                    OGcreationTime = creationTime;
+                    OGLocation = location;
+                    OGLocationSpec = locationDesc;
 
 
-                /////////
+                    /////////
 
-            }
-        });
+                }
+            });
+        }
     }
 
     public void setNewDescription(String newDescription) {
@@ -178,15 +185,17 @@ public class Exif {
     public boolean testloadExifTags() {
 
         String s = "";
-        exifs.addAll(metaData.getItems());
-        for (ImageMetadata.ImageMetadataItem imageMetadataItem : exifs) {
+        if (!metaData.getItems().isEmpty()) {
+            exifs.addAll(metaData.getItems());
+            for (ImageMetadata.ImageMetadataItem imageMetadataItem : exifs) {
 
-            if (imageMetadataItem.toString().startsWith("UserComment")) {
-                s = imageMetadataItem.toString();
-                System.out.println(imageMetadataItem + "\n");
-                if (s.endsWith("'test'")) {
-                    return true;
-                } else {continue;}
+                if (imageMetadataItem.toString().startsWith("UserComment")) {
+                    s = imageMetadataItem.toString();
+                    System.out.println(imageMetadataItem + "\n");
+                    if (s.endsWith("'test'")) {
+                        return true;
+                    } else {continue;}
+                }
             }
         }
         return false;
