@@ -50,20 +50,21 @@ public class Exif {
                 try {//TODO: check if corrupt/valid
                     metaData = Imaging.getMetadata(path.toFile());/////////////
                     ///
-                    if (!metaData.getItems().isEmpty()) {
+                    try {
                         for (ImageMetadata.ImageMetadataItem item : metaData.getItems()) {
                             if (item.toString().startsWith("UserComment") && item.toString().substring(13).length()>2) {
                                 System.out.println("Not Loaded (UserComment present): " + path.toString());
                                 return false;// if image already has UserComment do not load
                             }
                         };
+                        System.out.println("Loaded (UserComment present): " + path.toString());
+                        return true;
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                     ///
-                    System.out.println("Loaded (UserComment present): " + path.toString());
-                    return true;
-                } catch (ImageReadException | IOException | IllegalArgumentException exception) {
-                    System.out.println(exception.getMessage());
-                    System.out.println("Not Loaded (no exif data): " + path.toString());
+                } catch (RuntimeException | ImageReadException | IOException exception) {
+                    System.out.println("Not Loaded (no exif data): " + path.toString() + " : " + exception.getMessage());
                     return false;
                 }
             }
