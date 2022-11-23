@@ -74,9 +74,8 @@ public class Exif {
         return false;
     }
     public void loadExifTags() {
-        if (!metaData.getItems().isEmpty()) {
-            exifs.addAll(metaData.getItems());
-        }
+        exifs.addAll(metaData.getItems());
+
 
         if (!exifs.isEmpty()) {
             exifs.forEach(imageMetadataItem -> {
