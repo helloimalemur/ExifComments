@@ -49,7 +49,6 @@ public class Exif {
                 || path.toString().toLowerCase().endsWith(".jpg"))) {
                 try {//TODO: check if corrupt/valid
                     metaData = Imaging.getMetadata(path.toFile());/////////////
-                    ///
                     try {
                         for (ImageMetadata.ImageMetadataItem item : metaData.getItems()) {
                             if (item.toString().startsWith("UserComment") && item.toString().substring(13).length()>2) {
