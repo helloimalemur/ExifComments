@@ -57,7 +57,7 @@ public class Exif {
                                 return false;// if image already has UserComment do not load
                             }
                         };
-                        System.out.println("Loaded (UserComment present): " + path.toString());
+                        System.out.println("Loaded (No UserComment present): " + path.toString());
                         return true;
                     } catch (Exception e) {
                         throw new RuntimeException(e);
